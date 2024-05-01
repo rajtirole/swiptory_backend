@@ -13,7 +13,7 @@ const auth=asyncHandler(async(req,res,next)=>{
     }
     const user=jwt.verify(token,process.env.ACCESS_TOKEN_SECRET) 
     if(!user){
-        throw new ApiError(400,"not valid token")
+        throw new ApiError(400,"Invalid access token")
     }
     const data=await User.findById(user?._id).select("-password -refreshToken")
     if(!data){
@@ -23,7 +23,7 @@ const auth=asyncHandler(async(req,res,next)=>{
     req.user=data;
     next()
     } catch (error) {
-        throw new ApiError(400,"Invalid access token",error)
+        throw new ApiError(400,"Please Login/Register",error)
         
     }
 

@@ -79,7 +79,7 @@ const login = asyncHandler(async (req, res) => {
       throw new ApiError(400, "All feilds are required");
     }
     const user = await User.findOne({userName}).select("-refreshToken")
-    if (!user) throw new ApiError(400, "user not found");
+    if (!user) throw new ApiError(400, "User not registered");
     const isUser = await user.isPassword(password);
     if (!isUser) {
       throw new ApiError(400, "Invalid credentials");
