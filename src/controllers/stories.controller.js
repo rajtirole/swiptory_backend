@@ -41,7 +41,6 @@ const postStories = asyncHandler(async (req, res) => {
             stories: validatedStories,
           });
           const savedPost = await post.save();
-console.log(savedPost);
       
       
       res
@@ -168,11 +167,6 @@ const getNextStories = asyncHandler(async (req, res) => {
                               .skip(startIndex)
                               .limit(endIndex - startIndex);
 
-      // Check if there are more stories available
-      // const moreStoriesAvailable = await Post.findOne({ category }).skip(endIndex).limit(1);
-
-      // Return the fetched posts and the flag indicating more stories availability
-      // res.status(200).json(new ApiResponse(200, { posts, moreStoriesAvailable: !!moreStoriesAvailable }, "Successfully fetched next stories"));
       res.status(200).json(new ApiResponse(200, { posts}, "Successfully fetched next stories"));
   } catch (error) {
       console.error('Error:', error);
@@ -240,7 +234,6 @@ const likeStory = asyncHandler(async (req, res) => {
         likedUserId=likedUserId.toString()
         return likedUserId!==userId
       })
-      // story.likedBy = story.likedBy.filter(likedUserId => !likedUserId.equals(ObjectId(userId)));
        story.likedBy=likedStory
     } else {
       // If user has not liked the story yet, like it
